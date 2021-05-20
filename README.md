@@ -10,6 +10,35 @@
 
 使用vite
 
-## 性能优化
+# 性能优化
 
 性能优化主要是后端框架实现，前端对应调整相应接口
+
+
+# 界面展示
+
+## 首页
+
+![首页](https://pengchuanc.github.io/images/fund/home.png)
+
+## 基金筛选
+
+![筛选](https://pengchuanc.github.io/images/fund/cart.png)
+
+## 基金看板
+
+![看板主页](https://pengchuanc.github.io/images/fund/dashboard1.png)
+
+![展开页面](https://pengchuanc.github.io/images/fund/dashboard2.png)
+
+## 热点新闻
+
+![热点新闻](https://pengchuanc.github.io/images/fund/news.png)
+
+## 个基信息
+
+![总览](https://pengchuanc.github.io/images/fund/info1.png)
+
+![风控](https://pengchuanc.github.io/images/fund/info3.png)
+
+![资产配置](https://pengchuanc.github.io/images/fund/info2.png)
