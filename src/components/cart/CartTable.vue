@@ -110,7 +110,7 @@ export default defineComponent({
         slots: {
           default: (table: any) => {
             const {secucode} = table.row
-            return <span onClick={() => router.push({name: 'info', params: {secucode}})}>{secucode}</span>
+            return <div class="secucode" onClick={() => router.push({name: 'info', params: {secucode}})}>{secucode}</div>
           }
         },
         sortable: true,
@@ -354,5 +354,10 @@ export default defineComponent({
 .stock-change-modal {
   height: 380px;
   width: 100%;
+}
+
+.secucode {
+  width: 100%;
+  cursor: pointer;
 }
 </style>

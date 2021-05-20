@@ -93,7 +93,7 @@ export default defineComponent({
         slots: {
           default: ({row}: any) => {
             const {secucode} = row
-            return <span class="secucode" onClick={() => router.push({name: 'info', params: {secucode}})}>{secucode}</span>
+            return <div class="secucode" onClick={() => router.push({name: 'info', params: {secucode}})}>{secucode}</div>
           }
         }
       },
@@ -228,5 +228,6 @@ export default defineComponent({
 
 .secucode {
   cursor: pointer;
+  width: 100%;
 }
 </style>
