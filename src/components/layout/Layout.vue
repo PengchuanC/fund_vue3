@@ -20,6 +20,12 @@
     <p>Copyright © 2020 Nomura Orient International Securities Co.,Ltd. ALL RIGHTS RESERVED.</p>
     <br>
   </ElFooter>
+
+    <el-backtop :bottom="100" class="up-to-top-wrapper">
+      <div class="up-to-top">
+        UP
+      </div>
+    </el-backtop>
 </ElContainer>
 </template>
 
@@ -55,5 +61,31 @@ export default defineComponent({
 
 .info-link:not(first-child) {
   margin-left: 30px;
+}
+
+.up-to-top-wrapper {
+  position: fixed;
+  top: 93%;
+  right: 30px;
+  height: 1px;
+  width: 1px;
+  background-color: #f2f5f6;
+  box-shadow: 0 0 6px rgba(0,0,0, 0);
+  text-align: center;
+  line-height: 1px;
+  color: #1989fa;
+}
+
+.up-to-top {
+  position: fixed;
+  top: 93%;
+  right: 30px;
+  height: 40px;
+  width: 40px;
+  background-color: #f2f5f6;
+  box-shadow: 0 0 6px rgba(0,0,0, .12);
+  text-align: center;
+  line-height: 40px;
+  color: #1989fa;
 }
 </style>

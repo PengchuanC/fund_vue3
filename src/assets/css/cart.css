@@ -60,32 +60,6 @@ h4 {
     margin: 0 0 10px;
 }
 
-.up-to-top-wrapper {
-    position: fixed;
-    top: 93%;
-    right: 30px;
-    height: 1px;
-    width: 1px;
-    background-color: #f2f5f6;
-    box-shadow: 0 0 6px rgba(0,0,0, 0);
-    text-align: center;
-    line-height: 1px;
-    color: #1989fa;
-}
-
-.up-to-top {
-    position: fixed;
-    top: 93%;
-    right: 30px;
-    height: 40px;
-    width: 40px;
-    background-color: #f2f5f6;
-    box-shadow: 0 0 6px rgba(0,0,0, .12);
-    text-align: center;
-    line-height: 40px;
-    color: #1989fa;
-}
-
 .submit-button {
     margin-left: 20px;
 }

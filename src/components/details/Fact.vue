@@ -20,6 +20,10 @@
         <h4 class="desc-title">持有人结构</h4>
         <HolderInfo :secucode="secucode" />
       </ElCard>
+      <ElCard shadow="never" class="card">
+        <h4 class="desc-title">短期评价</h4>
+        <RiskTraceShort :secucode="secucode" url="/fundinfo/risk/short"/>
+      </ElCard>
     </div>
     <div class="col">
       <ElCard shadow="never" class="card">
@@ -29,6 +33,10 @@
       <ElCard shadow="never" class="card">
         <h4 class="desc-title">规模变化</h4>
         <ScaleChange :secucode="secucode" />
+      </ElCard>
+      <ElCard shadow="never" class="card">
+        <h4 class="desc-title">长期评价</h4>
+        <RiskTraceShort :secucode="secucode" url="/fundinfo/risk/long"/>
       </ElCard>
     </div>
   </div>
@@ -43,10 +51,11 @@ import Turnover from "./charts/Turnover.vue";
 import HolderInfo from "./charts/HolderInfo.vue";
 import NavChart from "./charts/NavChart.vue";
 import ScaleChange from "./charts/ScaleChange.vue";
+import RiskTraceShort from "./charts/RiskTraceShort.vue";
 
 export default defineComponent({
   name: "Fact",
-  components: {ScaleChange, NavChart, HolderInfo, Turnover, Statistic, Brinson, Style},
+  components: {RiskTraceShort, ScaleChange, NavChart, HolderInfo, Turnover, Statistic, Brinson, Style},
   props: { secucode: String },
   setup(props){
     const { secucode } = props

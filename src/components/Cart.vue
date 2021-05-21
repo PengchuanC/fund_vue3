@@ -23,12 +23,6 @@
         </ElTabs>
       </div>
     </ElRow>
-
-    <el-backtop :bottom="100" class="up-to-top-wrapper">
-      <div class="up-to-top">
-        UP
-      </div>
-    </el-backtop>
   </ElCard>
 </template>
 
