@@ -1,6 +1,7 @@
 <template>
   <div class="industry-sw">
-    <div class="chart" :ref="reference"></div>
+    <div class="chart" :ref="reference" v-if="show"></div>
+    <div v-else>此基金没有该配置项</div>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ export default {
   setup(props){
     const {data} = props
     const instance = ref(document.body)
+    const show = ref(true)
 
     const reference = (el)=>{
       instance.value = el
@@ -75,9 +77,14 @@ export default {
       myChart.setOption(options)
     }
 
-    onMounted( ()=> {draw(data)})
+    onMounted( ()=> {
+      show.value = Object.keys(data).length !== 0
+      if (show.value) {
+        draw(data)
+      }
+    })
 
-    return { reference }
+    return { reference, show }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="reports">
+  <div class="reports" v-if="state.show">
     <div class="layout">
       <div>
         <div class="header">名次/报告期</div>
@@ -42,6 +42,9 @@
       </div>
     </div>
   </div>
+  <div v-else>
+    <ElEmpty description="基金类型不适用" class="empty"/>
+  </div>
 </template>
 
 <script lang="ts">
@@ -55,10 +58,12 @@ export default {
   setup(props: any){
     const { secucode } = props
 
+
     const state: any = reactive({
       reports: [],
       color: {},
-      msg: ''
+      msg: '',
+      show: true
     })
 
     const fetch = ()=>{
@@ -67,6 +72,8 @@ export default {
         state.reports = reports
         state.color = color
         state.msg = msg
+      }).catch(()=>{
+        state.show = false
       })
     }
 
@@ -172,4 +179,7 @@ export default {
   border-left: 1px solid #e9e9e9;
 }
 
+.empty {
+  min-height: 600px;
+}
 </style>

@@ -66,9 +66,6 @@ export default {
           axisPointer: {show: true},
           scale: true
         },
-        textStyle: {
-          fontFamily: ['kaiti', 'Arial']
-        },
         series: [
           {
             name: '个人投资者',

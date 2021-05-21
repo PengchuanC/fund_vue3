@@ -1,6 +1,7 @@
 <template>
   <div class="concentrate">
-    <div class="chart" :ref="reference" v-if="data?.length !== 0"></div>
+    <div class="chart" :ref="reference" v-if="show"></div>
+    <div v-else>此基金没有该配置项</div>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ export default {
   setup(props: any) {
     const {data}: any = props
     const instance = ref(document.getElementById(''))
+    const show = ref(true)
 
     const reference = (el) => {
       instance.value = el
@@ -64,10 +66,13 @@ export default {
     }
 
     onMounted(() => {
-      draw(data)
+      show.value = Object.keys(data).length !== 0
+      if (data.value) {
+        draw(data)
+      }
     })
 
-    return {reference}
+    return {reference, show}
   }
 }
 </script>

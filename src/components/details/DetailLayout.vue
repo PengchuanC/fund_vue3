@@ -18,7 +18,9 @@
       <ElTabPane label="资产配置" name="资产配置" :lazy="true">
         <Allocate :secucode="state.secucode" />
       </ElTabPane>
-      <ElTabPane label="业绩归因" name="业绩归因"></ElTabPane>
+      <ElTabPane label="业绩归因" name="业绩归因" v-if="false">
+        <Attribution :secucode="state.secucode" />
+      </ElTabPane>
       <ElTabPane label="重仓持股" name="重仓持股">
         <KeyPortfolio :secucode="state.secucode" />
       </ElTabPane>
@@ -34,10 +36,11 @@ import Fact from "./Fact.vue";
 import Manager from "./Manager.vue";
 import Allocate from "./Allocate.vue";
 import KeyPortfolio from "./KeyPortfolio.vue";
+import Attribution from "./Attribution.vue";
 
 export default defineComponent({
   name: "DetailLayout",
-  components: {KeyPortfolio, Allocate, Manager, Fact, Performance},
+  components: {Attribution, KeyPortfolio, Allocate, Manager, Fact, Performance},
   setup(){
     const route = useRoute()
 
