@@ -42,7 +42,7 @@ export default defineComponent({
     const columns: any[] = [
       {
         type: 'seq',
-        width: 60,
+        width: 50,
         align: 'center'
       },
       {
@@ -166,6 +166,22 @@ export default defineComponent({
             const {year3} = row
             return (
                 <span style={{color: year3 > 0 ? 'red' : 'green'}}>{numeral(year3).format('0.00')}</span>
+            )
+          }
+        },
+        sortable: true
+      },
+      {
+        field: 'year5',
+        title: '5年收益',
+        width: 90,
+        align: 'right',
+        slots: {
+          default: (table: any) => {
+            const {row} = table
+            const {year5} = row
+            return (
+                <span style={{color: year5 > 0 ? 'red' : 'green'}}>{numeral(year5).format('0.00')}</span>
             )
           }
         },

@@ -67,7 +67,7 @@ export default {
 
     onMounted(() => {
       show.value = Object.keys(data).length !== 0
-      if (data.value) {
+      if (show.value) {
         draw(data)
       }
     })

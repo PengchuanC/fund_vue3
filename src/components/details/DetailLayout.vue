@@ -18,7 +18,7 @@
       <ElTabPane label="资产配置" name="资产配置" :lazy="true">
         <Allocate :secucode="state.secucode" />
       </ElTabPane>
-      <ElTabPane label="业绩归因" name="业绩归因" v-if="false">
+      <ElTabPane label="业绩归因" name="业绩归因" :lazy="true">
         <Attribution :secucode="state.secucode" />
       </ElTabPane>
       <ElTabPane label="重仓持股" name="重仓持股">

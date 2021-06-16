@@ -17,12 +17,11 @@
         <Turnover :secucode="secucode" />
       </ElCard>
       <ElCard shadow="never" class="card">
-        <h4 class="desc-title">持有人结构</h4>
-        <HolderInfo :secucode="secucode" />
-      </ElCard>
-      <ElCard shadow="never" class="card">
-        <h4 class="desc-title">短期评价</h4>
-        <RiskTraceShort :secucode="secucode" url="/fundinfo/risk/short"/>
+        <h4 class="desc-title">业绩评价</h4>
+        <div style="display: inline-flex; width: 100%">
+          <RiskTraceShort :secucode="secucode" url="/fundinfo/risk/short"/>
+          <RiskTraceShort :secucode="secucode" url="/fundinfo/risk/long"/>
+        </div>
       </ElCard>
     </div>
     <div class="col">
@@ -35,8 +34,8 @@
         <ScaleChange :secucode="secucode" />
       </ElCard>
       <ElCard shadow="never" class="card">
-        <h4 class="desc-title">长期评价</h4>
-        <RiskTraceShort :secucode="secucode" url="/fundinfo/risk/long"/>
+        <h4 class="desc-title">持有人结构</h4>
+        <HolderInfo :secucode="secucode" />
       </ElCard>
     </div>
   </div>

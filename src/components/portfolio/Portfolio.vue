@@ -6,6 +6,7 @@
     <ElRadioGroup v-model="state.portType" class="port-type" @change="onChange">
       <ElRadio :label="1">观察池</ElRadio>
       <ElRadio :label="2">核心池</ElRadio>
+      <ElRadio :label="3">精选层</ElRadio>
     </ElRadioGroup>
     <ElSelect placeholder="最新一期" size="mini" v-model="state.date" @change="onChange">
       <ElOption :label="row" :value="row" :key="row" v-for="row in state.dateOptions"></ElOption>
@@ -63,7 +64,7 @@ export default defineComponent({
       state.data = []
       fetchDateOptions()
       request.post('/portfolio/new',{data:{
-        port_id: state.portfolio, port_type: state.portType
+        port_id: state.portfolio, port_type: state.portType, date: state.date
         }}).then((r: any)=>{
         state.data = r
         nextTick(()=>{})
@@ -215,7 +216,7 @@ export default defineComponent({
 }
 
 .port-type {
-  width: 200px;
+  width: 300px;
   margin-left: 50px;
   margin-right: 50px;
 }

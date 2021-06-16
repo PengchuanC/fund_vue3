@@ -57,11 +57,6 @@ const columns = [
     title: "成立以来(%)",
     field: "total",
     align: 'center'
-  },
-  {
-    title: "成立年化(%)",
-    field: "annual",
-    align: 'center'
   }
 ]
 

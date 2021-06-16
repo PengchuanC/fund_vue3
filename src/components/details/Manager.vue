@@ -76,7 +76,7 @@ const columns = [
     align: 'right'
   },
   {
-    title: '近1年同类排名',
+    title: '任职同类排名',
     field: 'rank',
     align: 'right'
   }

@@ -124,21 +124,18 @@ export default {
         return Math.abs(x)
       })) * 20) / 20;
       let x4 = data.map(x => {
-        return x.rto ? x.rto.toFixed(4) : 0
+        return x.rtt ? x.rtt.toFixed(4) : 0
       });
       let max4 = Math.ceil(Math.max(...x4.map(x => {
         return Math.abs(x)
       })) * 20) / 20;
       let y = data.map(x => {
-        return x.industry_name
-      }).reverse();
+        return x.industry
+      }).reverse()
       const ele = refs.value
-      const myChart = echarts.init(ele);
-      let option = {
+      const myChart = echarts.init(ele)
+      const option = {
         // backgroundColor: 'rgba(128, 128, 128, 0.1)',
-        textStyle: {
-          fontFamily: ['kaiti', 'Arial']
-        },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
@@ -165,9 +162,6 @@ export default {
             gridIndex: 0,
             name: "超额收益(%)",
             type: "category",
-            textStyle: {
-              fontFamily: ['KaiTi', 'Arial']
-            },
             data: y
           },
           {
@@ -175,9 +169,6 @@ export default {
             name: "资产配置(%)",
             type: "category",
             axisLabel: {show: false},
-            textStyle: {
-              fontFamily: ['KaiTi', 'Arial']
-            },
             data: y
           },
           {
@@ -185,9 +176,6 @@ export default {
             name: "个股选择(%)",
             type: "category",
             axisLabel: {show: false},
-            textStyle: {
-              fontFamily: ['KaiTi', 'Arial']
-            },
             data: y
           },
           {
@@ -195,9 +183,6 @@ export default {
             name: "交互收益(%)",
             type: "category",
             axisLabel: {show: false},
-            textStyle: {
-              fontFamily: ['KaiTi', 'Arial']
-            },
             data: y
           },
         ],
@@ -206,29 +191,29 @@ export default {
             type: 'bar',
             xAxisIndex: 0,
             yAxisIndex: 0,
-            data: x1.reverse()
+            data: x4.reverse()
           },
           {
             type: 'bar',
             xAxisIndex: 1,
             yAxisIndex: 1,
-            data: x2.reverse()
+            data: x1.reverse()
           },
           {
             type: 'bar',
             xAxisIndex: 2,
             yAxisIndex: 2,
-            data: x3.reverse()
+            data: x2.reverse()
           },
           {
             type: 'bar',
             xAxisIndex: 3,
             yAxisIndex: 3,
-            data: x4.reverse()
+            data: x3.reverse()
           },
         ]
-      };
-      myChart.setOption(option);
+      }
+      myChart.setOption(option)
     }
 
     onMounted( () => { getAttribution() })

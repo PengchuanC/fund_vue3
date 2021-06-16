@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :ref="dom" class="chart-style" v-if="showChart"></div>
-    <div v-else>基金类型不适用</div>
+    <div v-else>暂无数据或基金类型不适用</div>
   </div>
 </template>
 

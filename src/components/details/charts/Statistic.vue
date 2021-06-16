@@ -11,22 +11,22 @@
     <br>
     <ElDescriptions :column="3" title="业绩表现" border>
       <ElDescriptionsItem label="近1周:">
-        {{numeral(state.info.return_1w).format('0.00')}}%
+        {{numeral(state.info.return_1w).format('0.00%')}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="近1月:">
-        {{numeral(state.info.return_1m).format('0.00')}}%
+        {{numeral(state.info.return_1m).format('0.00%')}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="近3月:">
-        {{numeral(state.info.return_3m).format('0.00')}}%
+        {{numeral(state.info.return_3m).format('0.00%')}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="近6月:">
-        {{numeral(state.info.return_6m).format('0.00')}}%
+        {{numeral(state.info.return_6m).format('0.00%')}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="近1年:">
-        {{numeral(state.info.return_1y).format('0.00')}}%
+        {{numeral(state.info.return_1y).format('0.00%')}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="近3年:">
-        {{numeral(state.info.return_3y).format('0.00')}}%
+        {{numeral(state.info.return_3y).format('0.00%')}}
       </ElDescriptionsItem>
     </ElDescriptions>
     <br>
@@ -51,18 +51,23 @@
       </ElDescriptionsItem>
     </ElDescriptions>
     <br>
-    <ElDescriptions :column="4" title="基金标签" border>
-      <ElDescriptionsItem label="股票仓位" v-show="state.manager.stock">
+    <ElDescriptions :column="3" title="基金标签" border>
+      <ElDescriptionsItem label="股票仓位">
         {{numeral(state.manager.stock).format('0.00%')}}
       </ElDescriptionsItem>
-      <ElDescriptionsItem label="风格属性" v-show="state.manager.style">
+      <ElDescriptionsItem label="风格属性">
         {{state.manager.style}}
       </ElDescriptionsItem>
-      <ElDescriptionsItem label="规模属性" v-show="state.manager.scale_type">
+      <ElDescriptionsItem label="规模属性">
         {{state.manager.scale_type}}
       </ElDescriptionsItem>
-      <ElDescriptionsItem label="行业风格" v-show="state.manager.industry_style">
+      <ElDescriptionsItem label="行业风格">
         {{state.manager.industry_style}}
+      </ElDescriptionsItem>
+      <ElDescriptionsItem label="行业主题">
+        {{state.manager.industry}}
+      </ElDescriptionsItem>
+      <ElDescriptionsItem label="">
       </ElDescriptionsItem>
     </ElDescriptions>
   </div>

@@ -37,14 +37,24 @@ export default defineComponent({
           show: true,
           trigger: 'item',
         },
+        grid: {
+          bottom: 10,
+          containLabel: true
+        },
         legend: {
           data: Object.keys(value),
-          y: 'bottom'
+          y: 'bottom',
+          bottom: -10,
         },
         radar: {
           indicator: legend.map((x: string)=>{
             return {name: x, max: 1}
-          })
+          }),
+          name: {
+            textStyle: {
+              padding: [-12, -10]
+            }
+          }
         },
         series: [
           {
