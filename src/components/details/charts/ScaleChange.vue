@@ -26,6 +26,7 @@ export default defineComponent({
       const ele = refs.value
       const chart = echarts.init(ele)
       const options = {
+        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', '#B1BED0'],
         grid: {
           show: false,
           top: 30,

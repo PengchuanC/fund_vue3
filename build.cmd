@@ -2,7 +2,9 @@
 
 del dist.tar.gz
 
-yarn build
+start yarn build
+
+pause
 
 tar -cvf dist.tar.gz ./dist/*
 

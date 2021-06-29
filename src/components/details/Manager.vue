@@ -65,13 +65,13 @@ const columns = [
     align: 'center',
   },
   {
-    title: '基金规模',
+    title: '基金规模(亿元)',
     field: 'scale',
     align: 'right',
     formatter: (row) => numeral(row.cellValue).format('0,000.0'),
   },
   {
-    title: '任职回报',
+    title: '任职回报(%)',
     field: 'return',
     align: 'right'
   },

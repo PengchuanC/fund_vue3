@@ -25,7 +25,7 @@ export default {
     const draw = (data) => {
       const el: any = instance.value
       const myChart = echarts.init(el);
-      const options = {
+      const options: any = {
         tooltip : {
           trigger: 'axis',
           axisPointer: {
@@ -34,6 +34,13 @@ export default {
               backgroundColor: '#6a7985'
             }
           },
+        },
+        textStyle: {
+          fontFamily: ['kaiti', 'Arial'],
+        },
+        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', '#B1BED0'],
+        legend: {
+          data: data.names
         },
         grid: {
           left: '3%',

@@ -5,6 +5,10 @@
         <Statistic :secucode="secucode" />
       </ElCard>
       <ElCard shadow="never" class="card">
+        <h4 class="desc-title">区间表现</h4>
+        <Performance :secucode="secucode" />
+      </ElCard>
+      <ElCard shadow="never" class="card">
         <h4 class="desc-title">基金风格</h4>
         <Style :secucode="secucode" />
       </ElCard>
@@ -51,10 +55,11 @@ import HolderInfo from "./charts/HolderInfo.vue";
 import NavChart from "./charts/NavChart.vue";
 import ScaleChange from "./charts/ScaleChange.vue";
 import RiskTraceShort from "./charts/RiskTraceShort.vue";
+import Performance from "./charts/Performance.vue";
 
 export default defineComponent({
   name: "Fact",
-  components: {RiskTraceShort, ScaleChange, NavChart, HolderInfo, Turnover, Statistic, Brinson, Style},
+  components: {Performance, RiskTraceShort, ScaleChange, NavChart, HolderInfo, Turnover, Statistic, Brinson, Style},
   props: { secucode: String },
   setup(props){
     const { secucode } = props

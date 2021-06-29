@@ -37,6 +37,8 @@ export default defineComponent({
           show: true,
           trigger: 'item',
         },
+
+        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', '#B1BED0'],
         grid: {
           bottom: 10,
           containLabel: true
@@ -52,7 +54,8 @@ export default defineComponent({
           }),
           name: {
             textStyle: {
-              padding: [-12, -10]
+              padding: [-12, -10],
+              fontFamily: ['kaiti', 'arial']
             }
           }
         },

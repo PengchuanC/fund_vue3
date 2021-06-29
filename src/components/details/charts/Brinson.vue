@@ -33,6 +33,10 @@ export default {
       const chart = echarts.init(ele);
       const options = {
         // backgroundColor: 'rgba(128, 128, 128, 0.1)',
+        textStyle: {
+          fontFamily: ['Arial', 'kaiti'],
+        },
+        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', '#B1BED0'],
         grid: {
           show: false,
           top: 30,
@@ -74,9 +78,6 @@ export default {
           },
           axisPointer: {show: true},
           scale: true
-        },
-        textStyle: {
-          fontFamily: ['kaiti', 'Arial']
         },
         series: [
           {
@@ -145,6 +146,10 @@ export default {
             }
           }
         },
+        textStyle: {
+          fontFamily: ['Arial', 'kaiti'],
+        },
+        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', '#B1BED0'],
         grid: [
           {x: '7%', y: '15%', width: '20%', height: '70%', show: false,},
           {x: '30%', y: '15%', width: '18%', height: '70%', show: false,},

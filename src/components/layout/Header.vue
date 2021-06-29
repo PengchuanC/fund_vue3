@@ -6,7 +6,7 @@
       <ElMenuItem index="dashboard" class="menu-item"><i class="el-icon-trophy-1"></i>基金看板</ElMenuItem>
       <ElSubmenu index="3">
         <template #title><i class="el-icon-files"></i>基金入池</template>
-        <ElMenuItem index="3-1">分类统计</ElMenuItem>
+        <ElMenuItem index="etf">ETF统计</ElMenuItem>
         <ElMenuItem index="screen">基金筛选</ElMenuItem>
       </ElSubmenu>
       <ElMenuItem index="portfolio" class="menu-item"><i class="el-icon-data-line"></i>组合管理</ElMenuItem>

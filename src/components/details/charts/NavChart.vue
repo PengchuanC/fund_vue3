@@ -54,8 +54,8 @@ const columns = [
     align: 'center'
   },
   {
-    title: "成立以来(%)",
-    field: "total",
+    title: "近5年(%)",
+    field: "y5",
     align: 'center'
   }
 ]
@@ -111,6 +111,7 @@ export default defineComponent({
     const drawPerformance = (data) => {
       const myChart = echarts.init(chartDom.performance);
       const option = {
+        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', '#B1BED0'],
         grid: {
           show: false,
           top: 30,
@@ -182,6 +183,7 @@ export default defineComponent({
     const drawYearly = (data) => {
       const myChart = echarts.init(chartDom.yearly);
       const option = {
+        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', '#B1BED0'],
         grid: {
           show: false,
           top: 30,

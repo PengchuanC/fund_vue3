@@ -28,6 +28,7 @@ export default {
       const chart = echarts.init(ele)
       const options = {
         // backgroundColor: 'rgba(128, 128, 128, 0.1)',
+        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', '#B1BED0'],
         grid: {
           show: false,
           top: 30,

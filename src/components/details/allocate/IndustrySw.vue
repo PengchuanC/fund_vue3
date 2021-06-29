@@ -42,6 +42,10 @@ export default {
             return res;
           }
         },
+        textStyle: {
+          fontFamily: ['Arial', 'kaiti'],
+        },
+        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77'],
         legend: {
           data: data.names
         },
