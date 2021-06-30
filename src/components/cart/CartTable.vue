@@ -139,9 +139,10 @@ export default defineComponent({
         width: 100,
         align: 'right',
         formatter: (table: any) => {
-          return numeral(table.cellValue).format('0.0')
+          return numeral(table.cellValue).format(',000.0')
         },
-        sortable: true
+        sortable: true,
+        sortBy: ({row}) => row.nvi
       },
       {
         field: 'launch_date',

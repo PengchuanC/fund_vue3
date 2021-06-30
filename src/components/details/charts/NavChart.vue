@@ -96,7 +96,7 @@ export default defineComponent({
     }
 
     const fetchAndShowChart = () => {
-      request.post('/fundinfo/plotperformance', {
+      request.post('/fundinfo/plotperformance/v2', {
         data: {
           secucode: secucode, style: state.styleSelected, benchmark: state.benchmarkSelected
         }
