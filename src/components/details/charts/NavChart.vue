@@ -148,7 +148,7 @@ export default defineComponent({
           axisPointer: {show: true},
         },
         textStyle: {
-          fontFamily: ['kaiti', 'Arial']
+          fontFamily: ['Arial', 'kaiti']
         },
         series: [
           {
@@ -215,7 +215,7 @@ export default defineComponent({
           axisPointer: {show: true}
         },
         textStyle: {
-          fontFamily: ['kaiti', 'Arial']
+          fontFamily: ['Arial', 'kaiti']
         },
         series: [
           {

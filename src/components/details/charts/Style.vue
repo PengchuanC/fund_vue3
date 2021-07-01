@@ -75,6 +75,9 @@ export default {
         legend: {
           data: ['小盘价值', '小盘成长', '中盘价值', '中盘成长', '大盘价值', '大盘成长', '中证全债']
         },
+        textStyle: {
+          fontFamily: ['Arial', 'kaiti']
+        },
         xAxis: [
           {
             type: 'category',

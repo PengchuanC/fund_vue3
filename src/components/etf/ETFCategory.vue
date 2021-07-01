@@ -39,6 +39,9 @@ import api from '../../request';
 import dayjs from "dayjs";
 import numeral from "numeral";
 
+numeral.nullFormat('N/A')
+numeral.zeroFormat('-')
+
 const columns = [
   {
     type: 'seq',
@@ -90,6 +93,15 @@ const columns = [
     title: '跟踪指数',
     sortable: true,
     minWidth: 90,
+  },
+  {
+    field: 'trace_error',
+    title: '年化跟踪误差(%)',
+    align: 'right',
+    formatter: ({cellValue}) => numeral(cellValue).format('0.00'),
+    sortable: true,
+    sortBy: ({row}) => row.trace_error,
+    minWidth: 130,
   },
   {
     field: 'date',
@@ -154,22 +166,76 @@ const columns = [
     sortable: true
   },
   {
-    field: 'change',
-    title: '份额变动(万份)',
-    width: 120,
+    field: 'day_change',
+    title: '日份额变动(万份)',
+    width: 140,
     align: 'right',
     formatter: ({cellValue})=>numeral(cellValue*1e4).format('0,000.00'),
-    sortBy: ({row}) => row.change,
+    sortBy: ({row}) => row.day_change,
     sortable: true
   },
   {
-    field: 'capital',
-    title: '净流入(万元)',
+    field: 'day_capital',
+    title: '日净流入(万元)',
     align: 'right',
     formatter: ({cellValue})=>numeral(cellValue*1e4).format('0,000.00'),
     sortable: true,
-    sortBy: ({row}) => row.capital,
-    minWidth: 110,
+    sortBy: ({row}) => row.day_capital,
+    minWidth: 120,
+  },
+  {
+    field: 'wtd_change',
+    title: '周份额变动(万份)',
+    width: 140,
+    align: 'right',
+    formatter: ({cellValue})=>numeral(cellValue*1e4).format('0,000.00'),
+    sortBy: ({row}) => row.wtd_change,
+    sortable: true
+  },
+  {
+    field: 'wtd_capital',
+    title: '周净流入(万元)',
+    align: 'right',
+    formatter: ({cellValue})=>numeral(cellValue*1e4).format('0,000.00'),
+    sortable: true,
+    sortBy: ({row}) => row.wtd_capital,
+    minWidth: 120,
+  },
+  {
+    field: 'mtd_change',
+    title: '月份额变动(万份)',
+    width: 140,
+    align: 'right',
+    formatter: ({cellValue})=>numeral(cellValue*1e4).format('0,000.00'),
+    sortBy: ({row}) => row.mtd_change,
+    sortable: true
+  },
+  {
+    field: 'mtd_capital',
+    title: '月净流入(万元)',
+    align: 'right',
+    formatter: ({cellValue})=>numeral(cellValue*1e4).format('0,000.00'),
+    sortable: true,
+    sortBy: ({row}) => row.mtd_capital,
+    minWidth: 120,
+  },
+  {
+    field: 'ytd_change',
+    title: '年份额变动(万份)',
+    width: 140,
+    align: 'right',
+    formatter: ({cellValue})=>numeral(cellValue*1e4).format('0,000.00'),
+    sortBy: ({row}) => row.ytd_change,
+    sortable: true
+  },
+  {
+    field: 'ytd_capital',
+    title: '年净流入(万元)',
+    align: 'right',
+    formatter: ({cellValue})=>numeral(cellValue*1e4).format('0,000.00'),
+    sortable: true,
+    sortBy: ({row}) => row.ytd_capital,
+    minWidth: 120,
   }
 ]
 
@@ -209,9 +275,6 @@ export default defineComponent({
     onMounted(() => {
       selections()
       fetch()
-    })
-    nextTick(()=>{
-
     })
 
     return {state, columns, fetch, etfTable}

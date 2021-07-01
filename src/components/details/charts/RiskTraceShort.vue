@@ -55,7 +55,7 @@ export default defineComponent({
           name: {
             textStyle: {
               padding: [-12, -10],
-              fontFamily: ['kaiti', 'arial']
+              fontFamily: ['Arial', 'kaiti']
             }
           }
         },

@@ -62,7 +62,7 @@ export default {
           scale: true
         },
         textStyle: {
-          fontFamily: ['kaiti', 'Arial']
+          fontFamily: ['Arial', 'kaiti']
         },
         series: [
           {
