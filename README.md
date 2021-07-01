@@ -42,3 +42,11 @@
 ![风控](https://pengchuanc.github.io/images/fund/info3.png)
 
 ![资产配置](https://pengchuanc.github.io/images/fund/info2.png)
+
+## ETF资金流向
+
+![总览](https://pengchuanc.github.io/images/fund/etf1.png)
+
+![分类型](https://pengchuanc.github.io/images/fund/etf2.png)
+
+![近况](https://pengchuanc.github.io/images/fund/etf3.png)
