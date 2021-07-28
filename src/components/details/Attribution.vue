@@ -205,7 +205,7 @@ export default defineComponent({
     const onChange = ()=>{
       const [start, end] = state.dateRange
       state.start = dayjs(start).format('YYYY-MM-DD')
-      state.end = dayjs(end).format('YYYY-MM-DD')
+      state.end = dayjs(end).add(1, "month").add(-1, "day").format('YYYY-MM-DD')
       fetch()
     }
 

@@ -4,9 +4,9 @@
 
 <script>
 import {onMounted, ref} from "vue";
-import request from "../../../request";
 import * as echarts from 'echarts';
 import numeral from "numeral";
+import { holder } from "../../../assets/js/api";
 
 export default {
   name: "HolderInfo",
@@ -116,9 +116,9 @@ export default {
     }
 
     const getHolder = ()=>{
-      request.get('/fundinfo/holder', {params: {secucode: secucode}}).then(r=>{
-        const data = r.data
-        show(data)
+      console.log(secucode)
+      holder(secucode).then(resp=>{
+        show(resp)
       })
     }
 

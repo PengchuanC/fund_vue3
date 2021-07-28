@@ -41,6 +41,9 @@
         <h4 class="desc-title">持有人结构</h4>
         <HolderInfo :secucode="secucode" />
       </ElCard>
+      <ElCard shadow="never" class="card">
+        <CyclePerformance :secucode="secucode" />
+      </ElCard>
     </div>
   </div>
 </template>
@@ -56,10 +59,13 @@ import NavChart from "./charts/NavChart.vue";
 import ScaleChange from "./charts/ScaleChange.vue";
 import RiskTraceShort from "./charts/RiskTraceShort.vue";
 import Performance from "./charts/Performance.vue";
+import CyclePerformance from "./charts/CyclePerformance.vue";
 
 export default defineComponent({
   name: "Fact",
-  components: {Performance, RiskTraceShort, ScaleChange, NavChart, HolderInfo, Turnover, Statistic, Brinson, Style},
+  components: {
+    CyclePerformance,
+    Performance, RiskTraceShort, ScaleChange, NavChart, HolderInfo, Turnover, Statistic, Brinson, Style},
   props: { secucode: String },
   setup(props){
     const { secucode } = props

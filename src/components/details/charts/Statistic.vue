@@ -11,22 +11,22 @@
     <br>
     <ElDescriptions :column="3" title="业绩表现" border>
       <ElDescriptionsItem label="近1周:">
-        {{numeral(state.info.return_1w).format('0.00%')}}
+        {{numeral(state.info.return_1w/100).format('0.00%')}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="近1月:">
-        {{numeral(state.info.return_1m).format('0.00%')}}
+        {{numeral(state.info.return_1m/100).format('0.00%')}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="近3月:">
-        {{numeral(state.info.return_3m).format('0.00%')}}
+        {{numeral(state.info.return_3m/100).format('0.00%')}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="近6月:">
-        {{numeral(state.info.return_6m).format('0.00%')}}
+        {{numeral(state.info.return_6m/100).format('0.00%')}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="近1年:">
-        {{numeral(state.info.return_1y).format('0.00%')}}
+        {{numeral(state.info.return_1y/100).format('0.00%')}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="近3年:">
-        {{numeral(state.info.return_3y).format('0.00%')}}
+        {{numeral(state.info.return_3y/100).format('0.00%')}}
       </ElDescriptionsItem>
     </ElDescriptions>
     <br>
@@ -77,6 +77,7 @@
 import numeral from "numeral";
 import request from "../../../request";
 import {onMounted, reactive} from "vue";
+import {latestPerformance} from "../../../assets/js/api";
 
 export default {
   name: "Statistic",
@@ -90,7 +91,7 @@ export default {
     })
 
     const fetchPerformance = ()=>{
-      request.get('/fundinfo', {params: {secucode}}).then(r=>{
+      latestPerformance(secucode).then(r=>{
         state.info = r
       })
     }

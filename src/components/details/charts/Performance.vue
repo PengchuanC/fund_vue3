@@ -4,13 +4,16 @@
 
 <script>
 import {defineComponent, onMounted, ref} from "vue";
-import api from '../../../request';
 import numeral from "numeral";
+import {riskPerformance} from "../../../assets/js/api";
 
-numeral.nullFormat('-')
+numeral.nullFormat('N/A')
+numeral.zeroFormat('-')
 
-function format(value, digit){
-  if (digit === 2){
+function format(value, digit, pct=false){
+  if (digit === 2 && pct){
+    return numeral(value).format('0.00%')
+  } else if (digit === 2 && !pct) {
     return numeral(value).format('0.00')
   }
   return numeral(value).format('0.0000')
@@ -24,15 +27,15 @@ export default defineComponent({
     const data = ref([])
 
     onMounted(()=>{
-      api.get('/fundinfo/performance', {params: {secucode}}).then(r=>{
-        data.value = r
+      riskPerformance(secucode).then(r=>{
+        data.value = Object.keys(r).map(x=>r[x])
       })
     })
 
     const columns = [
       {
         title: "业绩区间",
-        field: "index",
+        field: "period",
         showOverflow: true,
         width: 80
       },
@@ -40,31 +43,31 @@ export default defineComponent({
         title: "绝对收益",
         field: "absolute",
         align: 'right',
-        formatter: ({cellValue})=>format(cellValue, 2)
+        formatter: ({cellValue})=>format(cellValue, 2, true)
       },
       {
         title: "年化收益",
         field: "annual",
         align: 'right',
-        formatter: ({cellValue})=>format(cellValue, 2)
+        formatter: ({cellValue})=>format(cellValue, 2, true)
       },
       {
         title: "超额收益",
         field: "beyond",
         align: 'right',
-        formatter: ({cellValue})=>format(cellValue, 2)
+        formatter: ({cellValue})=>format(cellValue, 2, true)
       },
       {
         title: "年化波动率",
         field: "vol",
         align: 'right',
-        formatter: ({cellValue})=>format(cellValue, 2)
+        formatter: ({cellValue})=>format(cellValue, 2, true)
       },
       {
         title: "最大回撤",
         field: "drawback",
         align: 'right',
-        formatter: ({cellValue})=>format(cellValue, 2)
+        formatter: ({cellValue})=>format(cellValue, 2, true)
       },
       {
         title: "Sharpe",

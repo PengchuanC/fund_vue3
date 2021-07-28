@@ -6,9 +6,9 @@
 
 <script>
 import {defineComponent, onMounted, ref} from "vue";
-import request from "../../../request";
 import * as echarts from 'echarts';
 import numeral from "numeral";
+import {scaleChange} from "../../../assets/js/api";
 
 export default defineComponent({
   name: "ScaleChange",
@@ -41,7 +41,8 @@ export default defineComponent({
             label: {
               backgroundColor: '#6a7985'
             }
-          }
+          },
+          snap: true
         },
         xAxis: [
           {
@@ -66,7 +67,7 @@ export default defineComponent({
           {
             name: '规模',
             type: 'line',
-            data: data.map(x=>numeral(x.nv).format('0,00.00')),
+            data: data.map(x=>(x.comb_nvi/1e8).toFixed(2)),
             symbol: "circle"
           },
         ]
@@ -75,9 +76,8 @@ export default defineComponent({
     }
 
     const getScaleChange = () => {
-      request.get('/fundinfo/scale', {params: {'secucode': secucode}}).then(r=>{
-        const data = r.data
-        drawTurnoverChart(data)
+      scaleChange(secucode).then(r=>{
+        drawTurnoverChart(r)
       })
     }
 

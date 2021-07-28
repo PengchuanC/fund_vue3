@@ -7,8 +7,8 @@
 
 <script>
 import {onMounted, ref} from "vue";
-import request from "../../../request";
-import * as echarts from 'echarts'
+import * as echarts from 'echarts';
+import {turnover} from "../../../assets/js/api";
 
 export default {
   name: "Turnover",
@@ -54,15 +54,13 @@ export default {
         ],
         yAxis: {
           axisLabel: {
-            formatter: (value) => {
-              return `${value}%`
-            }
+            formatter: "{value}%"
           },
           axisPointer: {show: true},
           scale: true
         },
         textStyle: {
-          fontFamily: ['Arial', 'kaiti']
+          fontFamily: ['arial', 'kaiti']
         },
         series: [
           {
@@ -80,15 +78,12 @@ export default {
     }
 
     const getTurnover = ()=>{
-      request.get('/fundinfo/turnover', {params: {secucode: secucode}}).then(r=>{
-        const data = r.data
-        if (data.length === 0) {
+      turnover(secucode).then(r=>{
+        if (r.length === 0){
           showChart.value = false
           return
         }
-        drawTurnoverChart(data)
-      }).catch(()=>{
-        showChart.value = false
+        drawTurnoverChart(r)
       })
     }
 

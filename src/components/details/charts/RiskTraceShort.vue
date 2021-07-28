@@ -37,7 +37,6 @@ export default defineComponent({
           show: true,
           trigger: 'item',
         },
-
         color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', '#B1BED0'],
         grid: {
           bottom: 10,
@@ -47,6 +46,9 @@ export default defineComponent({
           data: Object.keys(value),
           y: 'bottom',
           bottom: -10,
+          textStyle: {
+            fontFamily: ['Arial', 'kaiti']
+          }
         },
         radar: {
           indicator: legend.map((x: string)=>{
