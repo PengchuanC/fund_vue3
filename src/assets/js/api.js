@@ -58,3 +58,27 @@ export function scaleChange(secucode){
         {params: {secucode}}
     )
 }
+
+// 基金与指数相似度
+export function historyStyle(secucode){
+    return request(
+        "/fundinfo/his_style",
+        {params: {secucode}}
+    )
+}
+
+
+// 基金风险评价雷达图
+export function shortRisk(secucode) {
+    return request(
+        "/fundinfo/risk/short",
+        {params: {secucode}}
+    )
+}
+
+export function longRisk(secucode) {
+    return request(
+        "/fundinfo/risk/long",
+        {params: {secucode}}
+    )
+}

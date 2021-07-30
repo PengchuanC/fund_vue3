@@ -23,9 +23,12 @@
       <ElCard shadow="never" class="card">
         <h4 class="desc-title">业绩评价</h4>
         <div style="display: inline-flex; width: 100%">
-          <RiskTraceShort :secucode="secucode" url="/fundinfo/risk/short"/>
-          <RiskTraceShort :secucode="secucode" url="/fundinfo/risk/long"/>
+          <RiskTraceShort :secucode="secucode" url="short"/>
+          <RiskTraceShort :secucode="secucode" url="long"/>
         </div>
+      </ElCard>
+      <ElCard shadow="never" class="card">
+        <HistoryStyle :secucode="secucode" />
       </ElCard>
     </div>
     <div class="col">
@@ -60,10 +63,12 @@ import ScaleChange from "./charts/ScaleChange.vue";
 import RiskTraceShort from "./charts/RiskTraceShort.vue";
 import Performance from "./charts/Performance.vue";
 import CyclePerformance from "./charts/CyclePerformance.vue";
+import HistoryStyle from "./charts/HistoryStyle.vue";
 
 export default defineComponent({
   name: "Fact",
   components: {
+    HistoryStyle,
     CyclePerformance,
     Performance, RiskTraceShort, ScaleChange, NavChart, HolderInfo, Turnover, Statistic, Brinson, Style},
   props: { secucode: String },

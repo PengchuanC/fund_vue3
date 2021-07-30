@@ -1,36 +1,44 @@
 <template>
-  <div class="chart" :ref="reference"></div>
+  <div style="width: 100%">
+    <div class="chart" :ref="reference" v-if="ok"></div>
+    <div v-else>当前基金暂无此类数据</div>
+  </div>
 </template>
 
 <script lang="ts">
 import {defineComponent, onMounted, ref} from "vue";
-import request from "../../../request";
 import * as echarts from 'echarts';
 import numeral from "numeral";
+import {shortRisk, longRisk} from "../../../assets/js/api";
 
 numeral.nullFormat('N/A')
 
 export default defineComponent({
   name: "RiskTraceShort",
-  props: { secucode: String, url: String },
-  setup(props: any){
+  props: {secucode: String, url: String},
+  setup(props: any) {
 
-    const { secucode, url } = props
+    const {secucode, url} = props
 
     const instance: any = ref(document.body)
+    const ok = ref(true)
 
-    const reference: any = (el: HTMLElement)=>{
+    const reference: any = (el: HTMLElement) => {
       instance.value = el
     }
 
-    onMounted(()=>{
-      request.get(url, {params: {secucode: secucode}}).then((r: any)=>{
-        draw(r)
-      })
+    onMounted(() => {
+      switch (url) {
+        case "short":
+          shortRisk(secucode).then(r => draw(r));
+          break
+        case "long":
+          longRisk(secucode).then(r => draw(r))
+      }
     })
 
-    const draw = (data: { value: any, legend: any}) => {
-      const { value, legend} = data
+    const draw = (data: { value: any, legend: any }) => {
+      const {value, legend} = data
       const chart = echarts.init(instance.value)
       const options = {
         tooltip: {
@@ -51,7 +59,7 @@ export default defineComponent({
           }
         },
         radar: {
-          indicator: legend.map((x: string)=>{
+          indicator: legend.map((x: string) => {
             return {name: x, max: 1}
           }),
           name: {
@@ -64,10 +72,10 @@ export default defineComponent({
         series: [
           {
             type: 'radar',
-            data: Object.keys(value).map((x: string)=>{
+            data: Object.keys(value).map((x: string) => {
               return {
                 name: x,
-                value: value[x].map((x: number)=> numeral(x).format('0.00'))
+                value: value[x].map((x: number) => numeral(x).format('0.00'))
               }
             })
           }
@@ -76,14 +84,14 @@ export default defineComponent({
       chart.setOption(options)
     }
 
-    return { reference }
+    return {reference, ok}
   }
 })
 
 </script>
 
 <style scoped>
-.chart{
+.chart {
   width: 100%;
   height: 300px;
 }

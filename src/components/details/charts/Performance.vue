@@ -61,7 +61,7 @@ export default defineComponent({
         title: "年化波动率",
         field: "vol",
         align: 'right',
-        formatter: ({cellValue})=>format(cellValue, 2, true)
+        formatter: ({cellValue})=>format(cellValue * Math.pow(250, 0.5), 2, true)
       },
       {
         title: "最大回撤",
