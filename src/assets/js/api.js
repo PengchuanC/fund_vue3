@@ -82,3 +82,19 @@ export function longRisk(secucode) {
         {params: {secucode}}
     )
 }
+
+// 基金经理任职以来持仓前20位股票
+export function holdingTop20(secucode) {
+    return request(
+        "/manager/topHolding",
+        {params: {secucode}}
+    )
+}
+
+// 基金搜索
+export function searchFund(search) {
+    return request(
+        "/search/fundList",
+        {params: {search}}
+    )
+}
