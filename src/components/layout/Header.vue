@@ -24,6 +24,7 @@
           remote
           :remote-method="onChange"
           @change="onSelect"
+          @visible-change="visibleChange"
       >
         <ElOption v-for="(row, idx) in searchOptions" :label="row.label" :value="idx" :key="`search${String(idx)}`"
         >
@@ -37,9 +38,9 @@
 
 <script lang="ts">
 import {onMounted, ref} from "vue";
-import {useRouter} from 'vue-router'
-import request from "../../request";
+import {useRouter} from 'vue-router';
 import Storage from "../../assets/js/storage";
+import { searchFund } from "../../assets/js/api";
 
 export default {
   name: "Header",
@@ -62,7 +63,7 @@ export default {
     })
 
     const onChange = (search: string)=>{
-      request.post('/search/fundlist', {data: {search}}).then((r: any)=>{
+      searchFund(search).then(r=>{
         searchOptions.value = r.map((x: any) => {
           return {label: x[1], value: x[0]}
         })
@@ -74,14 +75,20 @@ export default {
         const selected = searchOptions.value[searchText.value]
         if (selected){
           Storage.saveSearchHistory(selected)
-          searchOptions.value = Storage.loadSearchHistory()
           router.push({name: 'info', params: {secucode: selected.value}})
         }
       }
     }
 
+    const visibleChange = (status)=>{
+      if (status) {
+        searchOptions.value = Storage.loadSearchHistory()
+        searchText.value = 0
+      }
+    }
+
     return {
-      activeIndex, selectMenu, searchText, onChange, searchOptions, onSelect, index
+      activeIndex, selectMenu, searchText, onChange, searchOptions, onSelect, index, visibleChange
     }
   }
 }
