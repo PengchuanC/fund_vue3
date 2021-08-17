@@ -75,6 +75,7 @@ export default {
         const selected = searchOptions.value[searchText.value]
         if (selected){
           Storage.saveSearchHistory(selected)
+          searchText.value =selected.label
           router.push({name: 'info', params: {secucode: selected.value}})
         }
       }
@@ -83,7 +84,6 @@ export default {
     const visibleChange = (status)=>{
       if (status) {
         searchOptions.value = Storage.loadSearchHistory()
-        searchText.value = 0
       }
     }
 

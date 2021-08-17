@@ -98,3 +98,43 @@ export function searchFund(search) {
         {params: {search}}
     )
 }
+
+// 基金风格
+export function rbsaStyle(secucode) {
+    return request(
+        '/fundinfo/style',
+        {params:{secucode}}
+    )
+}
+
+
+// 基金风格指数与宽基指数
+export function styleAndBenchmarkIndices(){
+    return request(
+        "/fundinfo/style&benchmark"
+    )
+}
+
+// 基金与基准指数净值对比
+export function netValueSeries(secucode, style, benchmark) {
+    return request(
+        "/fundinfo/nav",
+        {params:{secucode, style, benchmark}}
+    )
+}
+
+// 基金分年度业绩表现
+export function yearlyPerformance(secucode, style, benchmark){
+    return request(
+        "/fundinfo/nav/yearly",
+        {params:{secucode, style, benchmark}}
+    )
+}
+
+// 基金与指数近期表现
+export function recentPerformance(secucode, style, benchmark){
+    return request(
+        "/fundinfo/nav/recent",
+        {params:{secucode, style, benchmark}}
+    )
+}

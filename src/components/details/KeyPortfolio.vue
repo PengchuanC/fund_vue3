@@ -49,6 +49,7 @@
     <div v-else>
       <ElEmpty description="基金类型不适用" class="empty"/>
     </div>
+    <br>
   </div>
 </template>
 

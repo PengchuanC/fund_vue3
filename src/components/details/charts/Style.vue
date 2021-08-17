@@ -7,8 +7,8 @@
 
 <script>
 import {onMounted, ref} from "vue";
-import request from "../../../request";
 import * as echarts from 'echarts';
+import {rbsaStyle} from "../../../assets/js/api";
 
 export default {
   name: "Style",
@@ -25,29 +25,27 @@ export default {
     }
 
     const fetchData = () => {
-      request.get("/fundinfo/style", {params: {windcode: secucode}}).then((resp) => {
-        const data = resp;
-        if (data.length === 0){
+      rbsaStyle(secucode).then(r=>{
+        if (r.length === 0){
           showChart.value = false
+          return
         }
         const ret = {date: [], sv: [], sg: [], mv: [], mg: [], lv: [], lg: [], bd: []};
-        for (const i in data) {
-          if (!data.hasOwnProperty(i)){
+        for (const i in r) {
+          if (!r.hasOwnProperty(i)){
             continue
           }
-          const row = data[i];
-          ret.date.push(row.value_date);
-          ret.sv.push((row.small_value * 100).toFixed(2));
-          ret.sg.push((row.small_growth * 100).toFixed(2));
-          ret.mv.push((row.mid_value * 100).toFixed(2));
-          ret.mg.push((row.mid_growth * 100).toFixed(2));
-          ret.lv.push((row.large_value * 100).toFixed(2));
-          ret.lg.push((row.large_growth * 100).toFixed(2));
-          ret.bd.push((row.bond * 100).toFixed(2));
+          const row = r[i];
+          ret.date.push(row["date"]);
+          ret.sv.push((row["small_value"] * 100).toFixed(2));
+          ret.sg.push((row["small_growth"] * 100).toFixed(2));
+          ret.mv.push((row["mid_value"] * 100).toFixed(2));
+          ret.mg.push((row["mid_growth"] * 100).toFixed(2));
+          ret.lv.push((row["large_value"] * 100).toFixed(2));
+          ret.lg.push((row["large_growth"] * 100).toFixed(2));
+          ret.bd.push((row["bond"] * 100).toFixed(2));
         }
-        if (ret.length !== 0) {
-          show(ret)
-        }
+        show(ret)
       })
     }
 

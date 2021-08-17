@@ -159,7 +159,6 @@ export default defineComponent({
 
 .top-holding {
   width: 100%;
-  min-height: 500px;
   margin-top: 10px;
 }
 

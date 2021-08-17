@@ -2,10 +2,13 @@
   <div>
     <div class="selection-area">
       <ElSelect size="mini" v-model="state.styleSelected" placeholder="选择基金风格指数" class="selection" @change="onChange">
-        <ElOption v-for="row in state.styleOptions" :key="row[0]" :label="row[1]" :value="row[0]"></ElOption>
+        <ElOption
+            v-for="row in state.styleOptions" :key="row['secucode']" :label="row['chiname']" :value="row['secucode']">
+        </ElOption>
       </ElSelect>
       <ElSelect size="mini" v-model="state.benchmarkSelected" placeholder="选择宽基指数" class="selection" @change="onChange">
-        <ElOption v-for="row in state.benchmarkOptions" :key="row[0]" :label="row[1]" :value="row[0]"></ElOption>
+        <ElOption v-for="row in state.benchmarkOptions"
+                  :key="row['secucode']" :label="row['chiname']" :value="row['secucode']"></ElOption>
       </ElSelect>
     </div>
     <div class="chart-performance" :ref="performance"></div>
@@ -17,8 +20,8 @@
 
 <script>
 import {defineComponent, onMounted, reactive} from "vue";
-import request from "../../../request";
 import * as echarts from 'echarts';
+import {styleAndBenchmarkIndices, netValueSeries, yearlyPerformance, recentPerformance} from "../../../assets/js/api";
 
 
 const columns = [
@@ -88,27 +91,28 @@ export default defineComponent({
     }
 
     const fetchSelections = () => {
-      request.get('/fundinfo/style&benchmark').then(r => {
-        const {style, benchmark} = r
-        state.styleOptions = style
-        state.benchmarkOptions = benchmark
+      styleAndBenchmarkIndices().then(r=>{
+        state.styleOptions = r.style
+        state.benchmarkOptions = r.benchmark
       })
     }
 
     const fetchAndShowChart = () => {
-      request.post('/fundinfo/plotperformance/v2', {
-        data: {
-          secucode: secucode, style: state.styleSelected, benchmark: state.benchmarkSelected
-        }
-      }).then(r => {
-        state.tablePerformance = r.performance;
-        state.tableYearly = r.yearly
-        drawPerformance(r)
-        drawYearly(r)
+      netValueSeries(secucode, state.styleSelected, state.benchmarkSelected).then(r=>{
+        const {names, data} = r
+        drawPerformance(names, data)
+      })
+      recentPerformance(secucode, state.styleSelected, state.benchmarkSelected).then(r=>{
+        state.tablePerformance = r
+      })
+      yearlyPerformance(secucode, state.styleSelected, state.benchmarkSelected).then(r=>{
+        const {table, chart} = r
+        state.tableYearly = table
+        drawYearly(chart)
       })
     }
 
-    const drawPerformance = (data) => {
+    const drawPerformance = (names, data) => {
       const myChart = echarts.init(chartDom.performance);
       const option = {
         color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', '#B1BED0'],
@@ -129,20 +133,20 @@ export default defineComponent({
           }
         },
         legend: {
-          data: [data.fund, data.style, data.benchmark],
+          data: names,
           bottom: "5%"
         },
         xAxis: [
           {
             type: 'category',
-            data: data.data.date,
+            data: data.map(x=>x.date),
             axisPointer: {show: true}
           }
         ],
         yAxis: {
           axisLabel: {
             formatter: (value) => {
-              return `${value}%`
+              return `${value.toFixed(1)}`
             }
           },
           axisPointer: {show: true},
@@ -152,26 +156,26 @@ export default defineComponent({
         },
         series: [
           {
-            name: data.fund,
+            name: names[0],
             type: 'line',
-            data: data.data.fund.map((x) => {
-              return (x * 100).toFixed(2)
+            data: data.map(x => {
+              return (x['fund']).toFixed(2)
             }),
             symbol: "circle"
           },
           {
-            name: data.style,
+            name: names[1],
             type: 'line',
-            data: data.data.style.map((x) => {
-              return (x * 100).toFixed(2)
+            data: data.map(x => {
+              return (x['style']).toFixed(2)
             }),
             symbol: "circle"
           },
           {
-            name: data.benchmark,
+            name: names[2],
             type: 'line',
-            data: data.data.benchmark.map((x) => {
-              return (x * 100).toFixed(2)
+            data: data.map(x => {
+              return (x['benchmark']).toFixed(2)
             }),
             symbol: "circle"
           },
@@ -194,25 +198,30 @@ export default defineComponent({
         tooltip: {
           trigger: 'axis',
           axisPointer: {
-            type: 'cross',
+            type: 'item',
             label: {
               backgroundColor: '#6a7985'
             }
           }
         },
         legend: {
-          data: [data.fund, data.benchmark, data.style],
+          data: data.names,
           bottom: "5%"
         },
         xAxis: [
           {
             type: 'category',
-            data: data.yearly_chart.map(x => x.year),
+            data: data.year,
             axisPointer: {show: true}
           }
         ],
         yAxis: {
-          axisPointer: {show: true}
+          axisLabel: {
+            formatter: (value) => {
+              return `${value.toFixed(1)}`
+            }
+          },
+          axisPointer: {show: true},
         },
         textStyle: {
           fontFamily: ['Arial', 'kaiti']
@@ -220,18 +229,18 @@ export default defineComponent({
         series: [
           {
             type: 'bar',
-            name: data.fund,
-            data: data.yearly_chart.map(x => x[data.fund])
+            name: data.names[0],
+            data: data['fund']
           },
           {
             type: 'bar',
-            name: data.benchmark,
-            data: data.yearly_chart.map(x => x[data.benchmark])
+            name: data.names[1],
+            data: data['style']
           },
           {
             type: 'bar',
-            name: data.style,
-            data: data.yearly_chart.map(x => x[data.style])
+            name: data.names[2],
+            data: data['benchmark']
           }
         ]
       };
@@ -262,32 +271,32 @@ export default defineComponent({
       {
         title: `${getFullYear() - 5}(%)`,
         field: `${getFullYear() - 5}`,
-        align: 'center'
+        align: 'center',
       },
       {
         title: `${getFullYear() - 4}(%)`,
         field: `${getFullYear() - 4}`,
-        align: 'center'
+        align: 'center',
       },
       {
         title: `${getFullYear() - 3}(%)`,
         field: `${getFullYear() - 3}`,
-        align: 'center'
+        align: 'center',
       },
       {
         title: `${getFullYear() - 2}(%)`,
         field: `${getFullYear() - 2}`,
-        align: 'center'
+        align: 'center',
       },
       {
         title: `${getFullYear() - 1}(%)`,
         field: `${getFullYear() - 1}`,
-        align: 'center'
+        align: 'center',
       },
       {
         title: "YTD(%)",
-        field: "ytd",
-        align: 'center'
+        field: `${getFullYear()}`,
+        align: 'center',
       }
     ]
 

@@ -62,7 +62,7 @@ export default defineComponent({
           indicator: legend.map((x: string) => {
             return {name: x, max: 1}
           }),
-          name: {
+          axisName: {
             textStyle: {
               padding: [-12, -10],
               fontFamily: ['Arial', 'kaiti']

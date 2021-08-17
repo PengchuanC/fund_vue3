@@ -116,7 +116,6 @@ export default {
     }
 
     const getHolder = ()=>{
-      console.log(secucode)
       holder(secucode).then(resp=>{
         show(resp)
       })
