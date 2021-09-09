@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="row" :key="index">
-      <Simple @show="showComplex" :index="idx" v-for="(row, idx) in state.data" :key="'simple'+idx" :data="row"/>
+      <Simple @show="showComplex" :index="idx" v-for="(row, idx) in state.data" :key="'simple'+idx.toString()" :data="row"/>
     </div>
     </div>
     <ElCard style="width: 100%" v-else>

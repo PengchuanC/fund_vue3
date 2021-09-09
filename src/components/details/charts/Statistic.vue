@@ -35,7 +35,7 @@
         {{state.manager.classify}}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="基金规模">
-        {{state.manager.scale}}
+        {{numeral(state.manager.scale).format('0,000.0')}}(亿元)
       </ElDescriptionsItem>
       <ElDescriptionsItem label="基金经理">
         {{state.manager.manager}}
@@ -73,19 +73,19 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
+import {onMounted, reactive} from "vue";
 import numeral from "numeral";
 import request from "../../../request";
-import {onMounted, reactive} from "vue";
-import {latestPerformance} from "../../../assets/js/api";
+import {latestPerformance, fundStyle } from "../../../assets/js/api";
 
 export default {
   name: "Statistic",
   props: { secucode: String },
-  setup(props: any){
+  setup(props){
     const { secucode } = props
 
-    const state: any = reactive({
+    const state = reactive({
       info: {},
       manager: {}
     })
@@ -97,7 +97,7 @@ export default {
     }
 
     const fetchManager = ()=>{
-      request.get('/manager', {params: {secucode}}).then(r=>{
+      fundStyle(secucode).then(r=>{
         state.manager = r
       })
     }

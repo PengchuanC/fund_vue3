@@ -107,25 +107,25 @@ export default {
 
     const drawBrinson = (data) => {
       let x1 = data.map(x => {
-        return x.raa ? x.raa.toFixed(4) : 0
+        return x.rtt ? x.rtt.toFixed(4) : 0
       });
       let max1 = Math.ceil(Math.max(...x1.map(x => {
         return Math.abs(x)
       })) * 20) / 20;
       let x2 = data.map(x => {
-        return x.rss ? x.rss.toFixed(4) : 0
+        return x.raa ? x.raa.toFixed(4) : 0
       });
       let max2 = Math.ceil(Math.max(...x2.map(x => {
         return Math.abs(x)
       })) * 20) / 20;
       let x3 = data.map(x => {
-        return x.rin ? x.rin.toFixed(4) : 0
+        return x.rss ? x.rss.toFixed(4) : 0
       });
       let max3 = Math.ceil(Math.max(...x3.map(x => {
         return Math.abs(x)
       })) * 20) / 20;
       let x4 = data.map(x => {
-        return x.rtt ? x.rtt.toFixed(4) : 0
+        return x.rin ? x.rin.toFixed(4) : 0
       });
       let max4 = Math.ceil(Math.max(...x4.map(x => {
         return Math.abs(x)
@@ -196,25 +196,25 @@ export default {
             type: 'bar',
             xAxisIndex: 0,
             yAxisIndex: 0,
-            data: x4.reverse()
+            data: x1.reverse()
           },
           {
             type: 'bar',
             xAxisIndex: 1,
             yAxisIndex: 1,
-            data: x1.reverse()
+            data: x2.reverse()
           },
           {
             type: 'bar',
             xAxisIndex: 2,
             yAxisIndex: 2,
-            data: x2.reverse()
+            data: x3.reverse()
           },
           {
             type: 'bar',
             xAxisIndex: 3,
             yAxisIndex: 3,
-            data: x3.reverse()
+            data: x4.reverse()
           },
         ]
       }

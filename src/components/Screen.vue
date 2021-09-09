@@ -6,43 +6,43 @@
           <ElCol :span="6">
             <p class="tip">基金分类</p>
             <ElSelect v-model="state.selected.category" placeholder="选择分类" size="mini" multiple class="selector">
-              <ElOption v-for="(r, i) in state.selections.category" :key="'category'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.category" :key="'category'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span='3' class="col-md">
             <p class="tip">成立年限</p>
             <ElSelect v-model="state.selected.existed" placeholder="选择成立年限" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.existed" :key="'existed'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.existed" :key="'existed'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3" class="col-md">
             <p class="tip">最新净值</p>
             <ElSelect v-model="state.selected.netValue" placeholder="选择最新净值范围" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.netValue" :key="'netValue'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.netValue" :key="'netValue'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">
             <p class="tip">单一投资者持仓比例</p>
             <ElSelect v-model="state.selected.holding" placeholder="选择单一投资者持仓比例上限" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.holding" :key="'holding'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.holding" :key="'holding'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">
             <p class="tip">与同期指数比较</p>
             <ElSelect v-model="state.selected.index" placeholder="选择是否超过同期指数业绩" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.index" :key="'index'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.index" :key="'index'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">
             <p class="tip">与同期业绩比较基准比较</p>
             <ElSelect v-model="state.selected.benchmark" placeholder="选择是否超过同期基准业绩" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.benchmark" :key="'benchmark'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.benchmark" :key="'benchmark'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">
             <p class="tip">月度胜率</p>
             <ElSelect v-model="state.selected.win" placeholder="选择月底胜率" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.win" :key="'win'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.win" :key="'win'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
         </ElRow>
@@ -50,19 +50,19 @@
           <ElCol :span="3">
             <p class="tip">最大回撤</p>
             <ElSelect v-model="state.selected.drawback" placeholder="选择最大回撤上限" size="mini" clearable class="selector">
-              <ElOption v-for="(r, i) in state.selections.drawback" :key="'drawback'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.drawback" :key="'drawback'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">
             <p class="tip">债券：定期开放</p>
             <ElSelect v-model="state.selected.open" placeholder="选择是否定期开放" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.open" :key="'open'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.open" :key="'open'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">
             <p class="tip">债券：年化波动</p>
             <ElSelect v-model="state.selected.vol" placeholder="选择债券年化波动上限" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.vol" :key="'vol'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.vol" :key="'vol'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
         </ElRow>
@@ -76,32 +76,32 @@
           <ElCol :span="3">
             <p class="tip">管理人规模</p>
             <ElSelect v-model="state.selected.managedScale" placeholder="管理人规模水平" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.managedScale" :key="'org'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.managedScale" :key="'org'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">
             <p class="tip">基金经理从业年限</p>
             <ElSelect v-model="state.selected.working" placeholder="选择基金经理从业时间下限" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.working" :key="'workingYear'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.working" :key="'workingYear'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">
             <p class="tip">任职本基金时间</p>
             <ElSelect v-model="state.selected.workingThis" placeholder="选择基金经理任职本基金时间下限" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.workingThis" :key="'workingThis'+i" :value="r">{{ r }}
+              <ElOption v-for="(r, i) in state.selections.workingThis" :key="'workingThis'+i.toString()" :value="r">{{ r }}
               </ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">
             <p class="tip">基金经理从业期间平均回报</p>
             <ElSelect v-model="state.selected.ret" placeholder="选择基金经理从业回报下限" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.ret" :key="'workingYearR'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.ret" :key="'workingYearR'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">
             <p class="tip">基金经理任职年化回报</p>
             <ElSelect v-model="state.selected.retThis" placeholder="选择基金经理任职本基金年化回报下限" size="mini" class="selector">
-              <ElOption v-for="(r, i) in state.selections.retThis" :key="'workingThisR'+i" :value="r">{{ r }}</ElOption>
+              <ElOption v-for="(r, i) in state.selections.retThis" :key="'workingThisR'+i.toString()" :value="r">{{ r }}</ElOption>
             </ElSelect>
           </ElCol>
           <ElCol :span="3">

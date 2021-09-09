@@ -138,3 +138,11 @@ export function recentPerformance(secucode, style, benchmark){
         {params:{secucode, style, benchmark}}
     )
 }
+
+// 基金风格信息
+export function fundStyle(secucode) {
+    return request(
+        '/manager',
+        { params: {secucode}}
+    )
+}

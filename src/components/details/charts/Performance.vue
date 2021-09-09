@@ -53,7 +53,7 @@ export default defineComponent({
       },
       {
         title: "超额收益",
-        field: "beyond",
+        field: "abnormal",
         align: 'right',
         formatter: ({cellValue})=>format(cellValue, 2, true)
       },
