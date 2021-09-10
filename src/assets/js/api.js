@@ -83,6 +83,14 @@ export function longRisk(secucode) {
     )
 }
 
+// 基金经理在管基金信息
+export function managedFund(secucode) {
+    return request(
+        "/manager/managed",
+        {params: {secucode}}
+    )
+}
+
 // 基金经理任职以来持仓前20位股票
 export function holdingTop20(secucode) {
     return request(

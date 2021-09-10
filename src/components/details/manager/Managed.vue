@@ -8,7 +8,7 @@
         {{ state.manager.start }}
       </ElDescriptionsItem>
       <ElDescriptionsItem label="管理规模">
-        {{ state.manager.managed_scale }}亿元
+        {{ formatter(state.manager.managed_scale).format('0,000.0') }}亿元
       </ElDescriptionsItem>
     </ElDescriptions>
     <vxe-grid
@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import request from "../../../request";
 import {onMounted, reactive} from "vue";
 import numeral from "numeral";
+import { managedFund, fundStyle } from "../../../assets/js/api";
 
 const columns = [
   {
@@ -66,8 +66,9 @@ const columns = [
   },
   {
     title: '任职回报(%)',
-    field: 'return',
-    align: 'right'
+    field: 'return_after',
+    align: 'right',
+    formatter: (row) => numeral(row.cellValue).format('0.0%'),
   },
   {
     title: '任职同类排名',
@@ -88,13 +89,13 @@ export default {
     })
 
     const fetchFactManager = () => {
-      request.get("/manager", {params: {secucode: secucode}}).then((resp) => {
-        state.manager = resp
+      fundStyle(secucode).then(r=>{
+        state.manager = r
       })
     }
 
     const fetchManagerManaged = () => {
-      request.get("/manager/managed", {params: {secucode: secucode}}).then((resp) => {
+      managedFund(secucode).then((resp) => {
         state.managed = resp
       })
     }
@@ -104,7 +105,11 @@ export default {
       fetchFactManager()
     })
 
-    return {state, columns}
+    const formatter = (value) => {
+      return numeral(value)
+    }
+
+    return {state, columns, formatter}
   }
 }
 </script>
