@@ -7,7 +7,7 @@
             highlight-hover-row stripe highlight-hover-column
             auto-resize border
             style="width: 100%"
-            :data="data.table"
+            :data="data.data"
         >
           <vxe-column field="asset" title="资产"></vxe-column>
           <vxe-column field="current" title="占净值比(%)" align="center" :formatter="formatPercent"></vxe-column>
@@ -15,20 +15,21 @@
         </vxe-table>
       </div>
     </div>
-  <div class="update-date">更新日期: {{date}}</div>
+  <div class="update-date">更新日期: {{data.date}}</div>
 </template>
 
 <script>
-import {onMounted, ref} from "vue";
+import {onMounted, ref, reactive} from "vue";
 import * as echarts from 'echarts';
 import numeral from "numeral";
+import { fundAllocate } from "../../../assets/js/api";
 
 export default {
   name: "Asset",
-  props: { data: Object, date: String },
+  props: { secucode: String },
   setup(props){
-    const { data, date } = props
-
+    const { secucode } = props
+    const data = reactive({data: [], date: ''})
     const chartInstance = ref('')
 
     const draw = (data) => {
@@ -78,8 +79,16 @@ export default {
     }
 
     onMounted( ()=>{
-      draw(data.chart)
+      fetch(secucode)
     })
+
+    const fetch = (secucode)=>{
+      fundAllocate(secucode).then(r=>{
+        draw(r.chart)
+        data.data = r.table
+        data.date = r.date
+      })
+    }
 
     const formatPercent = ({cellValue})=>{
       return numeral(cellValue? cellValue*100: 0).format('0.00')
@@ -93,7 +102,7 @@ export default {
       chartInstance.value = el
     }
 
-    return { instance, data, date, formatPercent, formatFloat }
+    return { instance, data, formatPercent, formatFloat }
   }
 }
 </script>

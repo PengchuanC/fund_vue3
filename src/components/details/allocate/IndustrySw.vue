@@ -9,12 +9,13 @@
 import {onMounted, ref} from "vue";
 import numeral from "numeral";
 import * as echarts from 'echarts';
+import { fundIndustryStyle } from "../../../assets/js/api";
 
 export default {
   name: "IndustrySw",
-  props: { data: Object },
+  props: { secucode: String },
   setup(props){
-    const {data} = props
+    const { secucode } = props
     const instance = ref(document.body)
     const show = ref(true)
 
@@ -28,12 +29,13 @@ export default {
         tooltip : {
           trigger: 'axis',
           axisPointer: {
-            type: 'cross',
+            type: 'shadow',
             label: {
               backgroundColor: '#6a7985'
             }
           },
           formatter:function(params){
+            console.log(params[0])
             let res = params[0].name;
             for (let i = 0; i < params.length; i++) {
               res += "<div style='text-align: left'>"+params[i].marker+params[i].seriesName+"："+ params[i].data;
@@ -45,7 +47,7 @@ export default {
         textStyle: {
           fontFamily: ['Arial', 'kaiti'],
         },
-        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77'],
+        color: ['#CB2420', '#80A9AE', '#00305C', '#737374', '#DE7C77', "#CADBF6"],
         legend: {
           data: data.names
         },
@@ -82,10 +84,14 @@ export default {
     }
 
     onMounted( ()=> {
-      show.value = Object.keys(data).length !== 0
-      if (show.value) {
-        draw(data)
-      }
+      show.value = true
+      fundIndustryStyle(secucode).then(r=>{
+        if (!!r) {
+          draw(r)
+        } else {
+          show.value = false
+        }
+      })
     })
 
     return { reference, show }

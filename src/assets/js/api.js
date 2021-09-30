@@ -154,3 +154,59 @@ export function fundStyle(secucode) {
         { params: {secucode}}
     )
 }
+
+// 基金资产配置
+export function fundAllocate(secucode) {
+    return request(
+        '/asset',
+        { params: {secucode}}
+    )
+}
+
+// 基金历史资产配置
+export function fundHistoricalAllocate(secucode) {
+    return request(
+        '/asset/history',
+        { params: {secucode}}
+    )
+}
+
+// 基金重仓持股
+export function fundKeyStock(secucode) {
+    return request(
+        '/asset/keyStock',
+        { params: {secucode}}
+    )
+}
+
+// 基金重仓持债
+export function fundKeyBond(secucode) {
+    return request(
+        '/asset/keyBond',
+        { params: {secucode}}
+    )
+}
+
+// 基金持股集中度
+export function fundConcentrate(secucode) {
+    return request(
+        '/asset/concentrate',
+        { params: {secucode}}
+    )
+}
+
+// 基金行业分布
+export function fundIndustryCSI(secucode) {
+    return request(
+        '/asset/industryCsi',
+        { params: {secucode}}
+    )
+}
+
+// 基金行业风格
+export function fundIndustryStyle(secucode) {
+    return request(
+        '/asset/style',
+        { params: {secucode}}
+    )
+}

@@ -5,16 +5,17 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import {onMounted, ref} from "vue";
 import * as echarts from 'echarts';
 import numeral from "numeral";
+import { fundConcentrate } from "../../../assets/js/api";
 
 export default {
   name: "Concentrate",
-  props: {data: Array},
-  setup(props: any) {
-    const {data}: any = props
+  props: {secucode: String},
+  setup(props) {
+    const { secucode } = props
     const instance = ref(document.getElementById(''))
     const show = ref(true)
 
@@ -23,9 +24,9 @@ export default {
     }
 
     const draw = (data) => {
-      const el: any = instance.value
+      const el = instance.value
       const myChart = echarts.init(el);
-      const options: any = {
+      const options = {
         tooltip : {
           trigger: 'axis',
           axisPointer: {
@@ -73,10 +74,14 @@ export default {
     }
 
     onMounted(() => {
-      show.value = Object.keys(data).length !== 0
-      if (show.value) {
-        draw(data)
-      }
+      show.value = true
+      fundConcentrate(secucode).then(r=>{
+        if (!!r){
+          draw(r.concentrate)
+        } else {
+          show.value = true
+        }
+      })
     })
 
     return {reference, show}

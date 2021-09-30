@@ -1,20 +1,20 @@
 <template>
   <div class="allocate-his">
-    <div class="chart" :ref="reference" v-if="data.length !== 0"></div>
-    <div v-else></div>
+    <div class="chart" :ref="reference"></div>
   </div>
 </template>
 
 <script>
 import * as echarts from 'echarts'
-import {onMounted, ref} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import numeral from "numeral";
+import { fundHistoricalAllocate } from "../../../assets/js/api";
 
-export default {
+export default defineComponent({
   name: "AllocateHis",
-  props: { data: Array },
+  props: { secucode: String },
   setup(props){
-    const { data } = props
+    const { secucode } = props
 
     const instance = ref('')
 
@@ -124,11 +124,17 @@ export default {
       myChart.setOption(option)
     }
 
-    onMounted(()=>{draw(data)})
+    const fetch = (secucode) => {
+      fundHistoricalAllocate(secucode).then(r=>{
+        draw(r.history)
+      })
+    }
 
-    return { data, reference }
+    onMounted(()=> {fetch(secucode)})
+
+    return { reference }
   }
-}
+})
 </script>
 
 <style scoped>
