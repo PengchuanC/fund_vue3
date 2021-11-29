@@ -1,7 +1,7 @@
 import {extend} from "umi-request";
 
 
-const baseURL = "http://10.170.139.10:8005/api/v2"
+const baseURL = "https://product.nomuraoi-sec.com/api/v2"
 // const baseURL = "http://localhost:8005/api/v2"
 const request = extend({
     prefix: baseURL,

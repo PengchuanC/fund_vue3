@@ -59,7 +59,7 @@ export default {
         },
         xAxis: {
           type: 'category',
-          data: data.dates
+          data: data.data.map(x=>x.date)
         },
         yAxis: {
           type: 'value',
